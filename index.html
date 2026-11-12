@@ -367,6 +367,14 @@ dialog::backdrop{background:rgba(70,130,180,.45);backdrop-filter:blur(4px)}
 .actor .badge-hit:hover img,.actor .badge-hit:focus-visible img{transform:none}
 .actor .badge-more{display:none}
 @media(max-width:820px){.actor .badge-hit{top:20%;right:0;width:28px;height:28px}.actor .badge-hit img{width:10px;height:10px}}
+/* 4.3 compact race HUD: competition at a glance, without covering the barn. */
+.my-race{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:8px;background:linear-gradient(#fff8de,#f5dfaa);border:3px solid var(--wood-d);border-radius:15px;padding:5px 9px;margin:0 0 8px;box-shadow:0 3px 0 #b57b42;color:var(--ink);min-height:46px}
+.race-rank{display:flex;align-items:baseline;gap:2px;line-height:1}.race-rank small,.race-leader small{display:block;font-size:8px;color:#97744e;font-weight:900}.race-rank strong{font-size:24px;color:var(--red);-webkit-text-stroke:1px #9b3829}.race-rank span{font-size:10px;color:#8d704d}.race-leader{text-align:right;white-space:nowrap}.race-leader b{display:block;font-size:11px;color:#875536}
+.race-track{position:relative;height:18px;border:2px solid #b9874c;border-radius:99px;background:#ead8b5;overflow:hidden}.race-track i{position:absolute;inset:0 auto 0 0;min-width:7%;background:linear-gradient(90deg,#8fd674,#5dc674);border-radius:99px;transition:width .35s ease}.race-track span{position:absolute;inset:0;display:grid;place-items:center;font-size:9px;font-weight:900;color:#5a422c;text-shadow:0 1px #fff;white-space:nowrap;z-index:1}.my-race.leading{background:linear-gradient(#fff7b5,#ffd969);box-shadow:0 3px 0 #c9962d,0 0 12px #ffd55855}.my-race.leading .race-rank strong{color:#e48d19}
+/* Bottom tools become little farm signboards, not plain links. */
+.farm-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;flex-shrink:0;margin-top:3px}.farm-tool{min-width:0;min-height:42px;display:flex;align-items:center;justify-content:center;gap:5px;padding:4px 5px;background:linear-gradient(#fff6d8,#edd1a0);border:2px solid var(--wood-d);border-radius:11px;box-shadow:0 2px 0 #9f6636;text-align:left;color:#664526}.farm-tool:active{transform:translateY(1px);box-shadow:0 1px 0 #9f6636}.farm-tool .tool-icon{font-size:16px;line-height:1}.farm-tool b{display:block;font-size:10px;line-height:1.1;white-space:nowrap}.farm-tool small{display:block;font-size:7.5px;color:#9a7046;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:58px;margin-top:2px}
+@media(max-width:820px){body.playing .my-race{min-height:36px;padding:3px 7px;margin-bottom:5px;border-width:2px;box-shadow:0 2px 0 #b57b42}.race-rank strong{font-size:19px}.race-track{height:15px}.race-track span{font-size:8px}.race-leader b{font-size:9px}.farm-tools{gap:4px}.farm-tool{min-height:34px;padding:2px 3px;border-width:2px;border-radius:9px}.farm-tool .tool-icon{font-size:13px}.farm-tool b{font-size:9px}.farm-tool small{font-size:7px;max-width:50px}}
+@media(max-width:340px){.race-leader{display:none}.my-race{grid-template-columns:auto minmax(0,1fr)}.farm-tool .tool-icon{display:none}}
 </style></head>
 <body><div class="clouds" aria-hidden="true"><i></i><i></i><i></i></div>
 <div class="shell">
@@ -419,7 +427,7 @@ dialog::backdrop{background:rgba(70,130,180,.45);backdrop-filter:blur(4px)}
     <div id="questionHint" class="hint">정답 우리를 누르면 내 캐릭터가 걸어가요.</div>
    </div>
 
-   <div id="answerDock" class="answer-dock" aria-label="답 선택"></div><div class="stage-wrap"><div id="stage" class="stage">
+   <div class="my-race" id="myRace" aria-label="현재 순위"><div class="race-rank"><small>내 순위</small><strong id="myRank">-</strong><span id="rankTotal">/-</span></div><div class="race-track"><i id="raceFill"></i><span id="raceMessage">첫 문제부터 달려봐요!</span></div><div class="race-leader"><small>선두까지</small><b id="leaderGap">0점</b></div></div><div id="answerDock" class="answer-dock" aria-label="답 선택"></div><div class="stage-wrap"><div id="stage" class="stage">
     <div class="barn-sign"><small>남은 시간</small><strong id="timer">10</strong></div>
     <div id="stageNotice" class="stage-notice">다음 문제를 준비해요</div>
     <div id="dividers" class="dividers"></div>
@@ -433,7 +441,7 @@ dialog::backdrop{background:rgba(70,130,180,.45);backdrop-filter:blur(4px)}
 
    </div><div class="status-bar"><span id="status">정답 우리를 눌러 주세요.</span><strong id="myScore">0점</strong></div>
    <div id="resultText" class="result-text" aria-live="polite"></div>
-   <div class="game-bottom"><button id="historyButton" class="link">직전 정답</button><button id="badgeJournal" class="link">내 배지</button><button id="scoresButton" class="link">순위</button><button id="addBot" class="link">연습 동물 +1</button></div>
+   <nav class="farm-tools" aria-label="농장 도구"><button id="historyButton" class="farm-tool"><span class="tool-icon">📜</span><span><b>직전 정답</b><small>방금 문제 보기</small></span></button><button id="badgeJournal" class="farm-tool"><span class="tool-icon">🐾</span><span><b>내 배지</b><small>관찰일지</small></span></button><button id="scoresButton" class="farm-tool"><span class="tool-icon">🏆</span><span><b>순위표</b><small id="toolRank">현재 -위</small></span></button><button id="addBot" class="farm-tool"><span class="tool-icon">🐣</span><span><b>연습 동물</b><small>친구 +1</small></span></button></nav>
   </section>
 
   <aside class="score-panel cork">
@@ -732,7 +740,8 @@ function renderActors(){if(!state)return;const s=state,container=$('actors'),see
   el.classList.toggle('happy',s.phase==='result'&&(s.result.awards[p.id]||0)>0);el.classList.toggle('sad',s.phase==='result'&&p.active&&p.id!==s.rule?.leaderId&&!(s.result.awards[p.id]>0));}
  for(const el of [...container.children])if(!seen.has(el.dataset.id))el.remove();}
 
-function renderScores(){if(!state)return;const sorted=[...state.players].sort((a,b)=>b.score-a.score);$('scoreList').innerHTML=sorted.map((p,i)=>{const c=CHARS[p.level||0];return `<div class="score-row ${p.id===state.me?'me':''}" style="--r:${(i%3-1)*.6}deg"><span class="position">${i+1}</span><img src="${asset(c.sprite)}" alt="${esc(c.name)}"><span class="who">${esc(p.name)}<small>${esc(c.name)} · ${p.bot?'연습 봇':!p.connected?'연결 대기':p.active?'참가 중':'다음 문제 대기'}</small></span>${badgeMini(p)}<strong>${p.score}</strong></div>`}).join('')}
+function compactRank(){if(!state)return;const me=state.players.find(p=>p.id===state.me);if(!me)return;const connected=state.players.filter(p=>p.connected!==false),scores=[...new Set(connected.map(p=>p.score))].sort((a,b)=>b-a),rank=scores.indexOf(me.score)+1,total=connected.length,lead=Math.max(...connected.map(p=>p.score)),gap=Math.max(0,lead-me.score),max=Math.max(100,lead);$('myRank').textContent=rank;$('rankTotal').textContent='/'+total;$('leaderGap').textContent=gap?gap+'점':'선두!';$('raceFill').style.width=Math.max(7,me.score/max*100)+'%';$('toolRank').textContent='현재 '+rank+'위';let msg=rank===1?(gap===0&&connected.filter(p=>p.score===me.score).length>1?'공동 선두예요!':'지금 선두예요!'):rank<=3?'선두가 코앞이에요!':gap<=200?'한 문제면 뒤집어요!':'아직 역전할 수 있어요!';if(state.round===0)msg='첫 문제부터 달려봐요!';$('raceMessage').textContent=msg;$('myRace').classList.toggle('leading',rank===1&&state.round>0)}
+function renderScores(){if(!state)return;compactRank();const sorted=[...state.players].sort((a,b)=>b.score-a.score);$('scoreList').innerHTML=sorted.map((p,i)=>{const c=CHARS[p.level||0];return `<div class="score-row ${p.id===state.me?'me':''}" style="--r:${(i%3-1)*.6}deg"><span class="position">${i+1}</span><img src="${asset(c.sprite)}" alt="${esc(c.name)}"><span class="who">${esc(p.name)}<small>${esc(c.name)} · ${p.bot?'연습 봇':!p.connected?'연결 대기':p.active?'참가 중':'다음 문제 대기'}</small></span>${badgeMini(p)}<strong>${p.score}</strong></div>`}).join('')}
 function updateClock(){if(!state)return;const clock=adapter instanceof LocalAdapter&&adapter.pausedAt?adapter.pausedAt:now();const left=Math.max(0,state.deadline-(clock+offset));const total=state.phase==='question'?CFG.questionSeconds:state.phase==='result'?CFG.resultSeconds:CFG.sessionResultSeconds;
  $('timer').textContent=state.phase==='question'?Math.ceil(left):state.phase==='intro'?'준비':'—';$('timeFill').style.width=Math.min(100,left/total*100)+'%';
  const hurry=state.phase==='question'&&left<=3;$('timeFill').parentElement.classList.toggle('hurry',hurry);$('timer').parentElement.classList.toggle('hurry',hurry);
