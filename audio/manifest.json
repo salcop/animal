@@ -1,0 +1,168 @@
+{
+ "version": 1,
+ "soundfont": "TimGM6mb.sf2",
+ "bgm": {
+  "bgm_yard": {
+   "file": "bgm/bgm_yard.ogg",
+   "loop": true,
+   "seconds": 35.556
+  },
+  "bgm_quiz": {
+   "file": "bgm/bgm_quiz.ogg",
+   "loop": true,
+   "seconds": 30.968
+  },
+  "bgm_tension": {
+   "file": "bgm/bgm_tension.ogg",
+   "loop": true,
+   "seconds": 28.235
+  },
+  "bgm_festival": {
+   "file": "bgm/bgm_festival.ogg",
+   "loop": true,
+   "seconds": 29.091
+  }
+ },
+ "sfx": {
+  "ui_tap": {
+   "file": "sfx/ui_tap.ogg",
+   "seconds": 0.453
+  },
+  "ui_back": {
+   "file": "sfx/ui_back.ogg",
+   "seconds": 0.645
+  },
+  "pick": {
+   "file": "sfx/pick.ogg",
+   "seconds": 0.65
+  },
+  "correct": {
+   "file": "sfx/correct.ogg",
+   "seconds": 2.433
+  },
+  "wrong": {
+   "file": "sfx/wrong.ogg",
+   "seconds": 1.216
+  },
+  "tick": {
+   "file": "sfx/tick.ogg",
+   "seconds": 0.292
+  },
+  "tick_urgent": {
+   "file": "sfx/tick_urgent.ogg",
+   "seconds": 0.391
+  },
+  "time_up": {
+   "file": "sfx/time_up.ogg",
+   "seconds": 0.919
+  },
+  "reveal": {
+   "file": "sfx/reveal.ogg",
+   "seconds": 1.401
+  },
+  "combo_1": {
+   "file": "sfx/combo_1.ogg",
+   "seconds": 0.633
+  },
+  "combo_2": {
+   "file": "sfx/combo_2.ogg",
+   "seconds": 1.802
+  },
+  "combo_3": {
+   "file": "sfx/combo_3.ogg",
+   "seconds": 1.961
+  },
+  "combo_4": {
+   "file": "sfx/combo_4.ogg",
+   "seconds": 0.786
+  },
+  "combo_5": {
+   "file": "sfx/combo_5.ogg",
+   "seconds": 1.917
+  },
+  "round_start": {
+   "file": "sfx/round_start.ogg",
+   "seconds": 2.033
+  },
+  "countdown_go": {
+   "file": "sfx/countdown_go.ogg",
+   "seconds": 2.89
+  },
+  "match_start": {
+   "file": "sfx/match_start.ogg",
+   "seconds": 3.5
+  },
+  "player_join": {
+   "file": "sfx/player_join.ogg",
+   "seconds": 1.026
+  },
+  "claw_move": {
+   "file": "sfx/claw_move.ogg",
+   "seconds": 1.009
+  },
+  "claw_grab": {
+   "file": "sfx/claw_grab.ogg",
+   "seconds": 2.046
+  },
+  "claw_lift": {
+   "file": "sfx/claw_lift.ogg",
+   "seconds": 1.172
+  },
+  "eliminated": {
+   "file": "sfx/eliminated.ogg",
+   "seconds": 3.176
+  },
+  "ghost_appear": {
+   "file": "sfx/ghost_appear.ogg",
+   "seconds": 2.237
+  },
+  "pig_grunt": {
+   "file": "sfx/pig_grunt.ogg",
+   "seconds": 0.771
+  },
+  "coin": {
+   "file": "sfx/coin.ogg",
+   "seconds": 1.066
+  },
+  "xp_tick": {
+   "file": "sfx/xp_tick.ogg",
+   "seconds": 2.1
+  },
+  "reward_big": {
+   "file": "sfx/reward_big.ogg",
+   "seconds": 1.75
+  },
+  "drumroll": {
+   "file": "sfx/drumroll.ogg",
+   "seconds": 4.1
+  },
+  "tada": {
+   "file": "sfx/tada.ogg",
+   "seconds": 3.561
+  },
+  "podium_3": {
+   "file": "sfx/podium_3.ogg",
+   "seconds": 1.913
+  },
+  "podium_2": {
+   "file": "sfx/podium_2.ogg",
+   "seconds": 1.895
+  },
+  "podium_1": {
+   "file": "sfx/podium_1.ogg",
+   "seconds": 3.553
+  },
+  "applause": {
+   "file": "sfx/applause.ogg",
+   "seconds": 3.54
+  },
+  "jingle_rankup": {
+   "file": "sfx/jingle_rankup.ogg",
+   "seconds": 4.586
+  },
+  "jingle_victory": {
+   "file": "sfx/jingle_victory.ogg",
+   "seconds": 5.66
+  }
+ }
+}
