@@ -261,7 +261,24 @@ body.calm .pd-slot,body.calm .medal,body.calm .ledger-row,body.calm .ledger-tota
 .actor .puppet .char.pop-back{animation:headPop .45s .12s cubic-bezier(.3,1.6,.5,1) both}
 @keyframes headPop{0%{transform:scale(.6,.4);opacity:.2}60%{transform:scale(1.08,1.12);opacity:1}100%{transform:none}}
 @media (prefers-reduced-motion:reduce){.head-puff{display:none}.behavior-head.pop-in,.char.pop-back{animation:none!important}}
-</style></head><body>
+</style><style id="v36-2-nosel">
+/* V36.2: 길게 눌러도 파란 선택 영역·이미지 메뉴·탭 하이라이트가 생기지 않게 (입력칸은 그대로 선택 가능) */
+html,body,*{-webkit-tap-highlight-color:transparent}
+body,body *{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+img,svg,canvas{-webkit-user-drag:none;user-drag:none}
+input,textarea,select,[contenteditable="true"],input *,textarea *{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
+::selection{background:transparent}
+input::selection,textarea::selection{background:#b8d4ff}
+</style>
+<script id="v36-2-nosel-js">
+(function(){const editable=t=>!!(t&&t.closest&&t.closest('input,textarea,select,[contenteditable="true"]'));
+document.addEventListener('contextmenu',e=>{if(!editable(e.target))e.preventDefault()},{capture:true});
+document.addEventListener('dragstart',e=>{if(!editable(e.target))e.preventDefault()},{capture:true});
+document.addEventListener('selectstart',e=>{if(!editable(e.target))e.preventDefault()},{capture:true});
+document.addEventListener('selectionchange',()=>{const a=document.activeElement;if(editable(a))return;const s=getSelection();if(s&&s.rangeCount&&!s.isCollapsed)s.removeAllRanges()});
+})();
+</script>
+</head><body>
 <main id="home" class="home farm-home">
 <header class="home-top"><span class="farm-seal">농장 입장 안내소 <small>LOCAL PLAY · V21</small></span><div class="home-top-actions"><button id="introReplay" class="intro-replay" aria-label="인트로 다시 보기">인트로</button><button id="homeMenu" class="menu" aria-label="옵션 메뉴"><i></i></button></div></header>
 <section class="farm-hero" aria-label="동물 퀴즈 농장 입구">
